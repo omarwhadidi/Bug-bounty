@@ -1,0 +1,14 @@
+<script>
+var ports = [80,21, 443, 445, 554, 3306, 3690, 1234,8000];
+for(var i=0; i<ports.length; i++) {
+    var s = new WebSocket("wss://10.0.0.49:" + ports[i]);
+    s.start = performance.now();
+    s.port = ports[i];
+    s.onerror = function() {
+        console.log("Port " + this.port + ": " + (performance.now() -this.start) + " ms");
+    };
+    s.onopen = function() {
+        console.log("Port " + this.port+ ": " + (performance.now() -this.start) + " ms");
+    };
+}
+</script>

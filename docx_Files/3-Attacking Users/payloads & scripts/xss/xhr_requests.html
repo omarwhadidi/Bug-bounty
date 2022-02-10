@@ -1,0 +1,108 @@
+<!----------------------------------------------------------  Text plain Parsing  --------------------------------------------------------->  
+<script type="text/javascript">
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() 
+{
+    if (this.readyState == 4 && this.status == 200) {
+       // Typical action to be performed when the document is ready
+       response_data = xhr.responseText;
+       document.getElementById("result").innerHTML = xhr.responseText;
+       alert(response_data);
+    }  
+};  //end of function
+	
+xhr.open("GET", "/lab/webapp/jfp/xhr/data", true);
+xhr.send();
+</script>
+
+<!----------------------------------------------------------  Text plain Parsing  ---------------------------------------------------------> 
+<!----------------------------------------------------------  HTML Parsing ----------------------------------------------------------------> 
+ 
+
+<script type="text/javascript">
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() 
+{
+    if (this.readyState == 4 && this.status == 200) {
+       // Typical action to be performed when the document is ready
+       html_page = xhr.responseXML;
+       document.getElementById("result").innerHTML =html_page.title ;
+       alert(html_page.title);
+    }  
+};  //end of function
+	
+xhr.open("GET", "/lab/webapp/jfp/2", true);
+xhr.responseType = "document";
+xhr.send();
+</script>
+
+<script type="text/javascript">
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() 
+{
+    if (this.readyState == 4 && this.status == 200) {
+       // Typical action to be performed when the document is ready
+       html_page = xhr.responseXML;
+       result = "";
+       links = html_page.getElementsByTagName("a");
+       for (i = 0; i < links.length; i++) {                  // easy method to get content of a page
+   		  result += links[i] + "<br>";
+       }
+       document.getElementById("result").innerHTML =result;
+       alert(html_page.title);
+
+    }  
+};  //end of function
+	
+xhr.open("GET", "/lab/webapp/jfp/2", true);
+xhr.responseType = "document";
+xhr.send();
+</script>
+
+<!----------------------------------------------------------  HTML Parsing ----------------------------------------------------------------> 
+<!-------------------------------------------------------- Json-Based Parsing ------------------------------------------------------------->
+
+<script type="text/javascript">
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() 
+{
+    if (this.readyState == 4 && this.status == 200) {
+       // Typical action to be performed when the document is ready
+       //json data Example  =  {"vuln": 3, "num1": {"version": "1.41", "description": "Buffer overflow", "software": "dempass"}, "num2": {"version": "1", "description": "Integer overflow", "software": "checker"}, "num3": {"version": "9", "description": "Stack overflow", "software": "highdownload"}}
+
+       json_data = JSON.parse(xhr.responseText);
+       document.getElementById("result").innerHTML = json_data.vuln;
+       alert(json_data.num2.software);
+
+    }  
+};  //end of function
+	
+xhr.open("GET", "/lab/webapp/jfp/json/data", true);
+xhr.send();
+</script>
+
+<!-------------------------------------------------------- Json-Based Parsing ------------------------------------------------------------->
+
+<!--------------------------------------------------------  Xml-Based Parsing  ------------------------------------------------------------>
+
+<script type="text/javascript">
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() 
+{
+    if (this.readyState == 4 && this.status == 200) {
+       // Typical action to be performed when the document is ready
+       xml_response = xhr.responseXML;
+       author = xml_response.getElementsByTagName("author")
+       result = "";
+       for (i = 0; i < author.length; i++) {                  // easy method to get content of a page
+   		  result += author[i].childNodes[0].nodeValue + "<br>";
+       }
+       document.getElementById("result").innerHTML =result ;
+       alert(author.length);
+    }  
+};  //end of function
+	
+xhr.open("GET", "/lab/webapp/jfp/xml/data", true);
+xhr.send();
+</script>
+<!--------------------------------------------------------  Xml-Based Parsing  ------------------------------------------------------------>

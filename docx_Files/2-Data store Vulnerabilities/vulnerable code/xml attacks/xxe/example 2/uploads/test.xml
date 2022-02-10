@@ -1,0 +1,11 @@
+<?xml version="1.0"?><!DOCTYPE contacts[<!ENTITY foo SYSTEM "file:///WINDOWS/system32/drivers/etc/hosts">]>
+<contacts>
+<name>test</name>
+<num>123456</num>
+<name>amgad</name>
+<num>456789</num>
+<name>test</name>
+<num>123456</num>
+<name>d</name>
+<num>456789</num>
+</contacts>

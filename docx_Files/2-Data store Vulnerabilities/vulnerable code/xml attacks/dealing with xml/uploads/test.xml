@@ -1,0 +1,21 @@
+
+<posts>
+	<post>
+		<postid>10</postid>
+		<username>xml</username>
+		<post>this is a test post from xml</post>
+		<date>2022-01-10</date>
+	</post>
+	<post>
+		<postid>11</postid>
+		<username>xml2</username>
+		<post>this is a test post from xml this is a test post from xml</post>
+		<date>2022-01-10</date>
+	</post>
+	<post>
+		<postid>12</postid>
+		<username>xml3</username>
+		<post>this is a test post from xml this is a test post from xml this is a test post from xml</post>
+		<date>2022-01-10</date>
+	</post>
+</posts>

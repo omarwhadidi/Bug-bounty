@@ -1,0 +1,54 @@
+Check out this shell script to identify XSS (Cross-Site Scripting) vulnerabilities using a number of open-source tools chained together:
+
+#!/bin/bash
+# $1 => example.domain
+
+subfinder -d $1 -o domains_subfinder_$1
+amass enum --passive -d $1 -o domains_$1
+
+cat domains_subfinder_$1 | tee -a domain_$1
+cat domains_$1 | filter-resolved | tee -a domains_$1.txt
+
+cat domains_$1.txt | ~/go/bin/httprobe -p http:81 -p http:8080 -p https:8443 | waybackurls | kxss | tee xss.txt
+
+
+#This is another combo which requires having several additional tools installed:
+
+#https://github.com/projectdiscovery/subfinder
+#https://github.com/OWASP/Amass
+#https://github.com/tomnomnom/hacks/tree/master/filter-resolved
+#https://github.com/tomnomnom/httprobe
+#https://github.com/tomnomnom/waybackurls
+#https://github.com/tomnomnom/hacks/tree/master/kxss
+
+
+------------------------------------------------
+Simple reflected XSS scenario
+By @_justYnot
+Source: link
+
+Here’s an interesting bug bounty write-up leading to a reflected XSS (Cross-Site Scripting by visiting a link).
+
+The author was able to successfully identify and exploit XSS despite the fact that the application was filtering some characters and keywords (possibly protected by WAF).
+
+Here’s what @_justYnot did in detail:
+
+Run subfinder -d target.com | httprobe -c 100 > target.txt
+Run cat target.txt | waybackurls | gf xss | kxss
+Got a URL which had all the special characters unfiltered and the parameter was callback=
+Tried some basic XSS payloads but they weren’t working, the site was filtering some keywords in the payload (like script and alert)
+Then he referred to the @PortSwigger XSS cheat sheet (link)
+After trying some payloads, one payload with event as onbegin worked and XSS executed successfully!
+Made a good report, sent it to the company last month and got rewarded $$
+This is a perfect example why we should never give up when things get difficult. When you’ve got a lead, you have to keep pushing to get the reward!
+
+
+
+Here’s list of tools @_justYnot used:
+
+https://github.com/projectdiscovery/subfinder
+https://github.com/tomnomnom/httprobe
+https://github.com/tomnomnom/waybackurls
+https://github.com/tomnomnom/gf
+https://github.com/1ndianl33t/Gf-Patterns (xss pattern)
+https://github.com/tomnomnom/hacks/tree/master/kxss

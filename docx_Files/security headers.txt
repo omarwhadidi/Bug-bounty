@@ -1,0 +1,15 @@
+
+ I added RequestHeader add X-LocalHeader "Headers For the Win" to my httpd.conf/apache.conf
+
+
+<IfModule mod_headers.c>
+  <Directory />
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set x-Frame-Options "SAMEORIGIN"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    Header always set Content-Security-Policy "default-src 'self'; font-src *;img-src * data:; script-src *; style-src *;"
+    Header always set Referrer-Policy "strict-origin"
+  </Directory>
+</IfModule>
+

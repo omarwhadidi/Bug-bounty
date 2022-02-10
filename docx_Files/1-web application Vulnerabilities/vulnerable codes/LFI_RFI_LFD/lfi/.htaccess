@@ -1,0 +1,8 @@
+AuthName "Restricted Area" 
+AuthType Basic 
+AuthUserFile /var/www/lfi/basics/.htpasswd 
+AuthGroupFile /dev/null 
+<Files creditcard>
+require valid-user
+</Files>
+

