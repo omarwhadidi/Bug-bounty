@@ -5,24 +5,17 @@
 
 <?php
 
-	if($_FILES["file"]["error"])
-	{
+	if($_FILES["file"]["error"]) {
 		header("Location: file.html");
 		die();	
 	}
 
 	$allowed = array('gif');
-
 	$splitFileName = explode(".", $_FILES["file"]["name"]);
-
 	$fileExtension = end($splitFileName);
-
 	$imageDetails = getimagesize($_FILES["file"]["tmp_name"]);
 
-	if( ($imageDetails == FALSE ) 
-		||  !in_array($fileExtension, $allowed)
-		
-	)
+	if( ($imageDetails == FALSE ) ||  !in_array($fileExtension, $allowed) )
 	{
 		echo "Please upload a GIF file";
 	}
@@ -35,7 +28,6 @@
 
 		move_uploaded_file($_FILES["file"]["tmp_name"], "uploads/".$_FILES["file"]["name"]);
 	}
-
 
 ?>
 

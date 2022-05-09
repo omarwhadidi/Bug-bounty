@@ -1,7 +1,6 @@
 <html>
 <body>
-
-<h3>Image File Upload Stats: </h3>
+	<h3>Image File Upload Stats: </h3>
 
 <?php
 
@@ -12,11 +11,8 @@
 	}
 
 	$notAllowed = array('php');
-
 	$splitFileName = explode(".", $_FILES["file"]["name"]);
-
 	$fileExtension = end($splitFileName);
-
 
 	if(in_array($fileExtension, $notAllowed))
 	{
@@ -31,10 +27,7 @@
 
 		move_uploaded_file($_FILES["file"]["tmp_name"], "uploads/".$_FILES["file"]["name"]);
 	}
-
-
 ?>
-
 </body>
 </html>
 

