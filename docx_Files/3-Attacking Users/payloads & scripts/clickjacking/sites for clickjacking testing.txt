@@ -1,5 +1,0 @@
-http://online.attacker-site.com/html5/ClickjackingTester/
-
-https://www.lookout.net/test/clickjack.html
-
-http://samy.pl/quickjack/

