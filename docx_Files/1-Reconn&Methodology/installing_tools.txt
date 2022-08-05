@@ -1,0 +1,103 @@
+#!/bin/bash
+# this script is for installing Tools for Reconn 
+
+# Installing Basic Dependencies
+echo 'Installing Basic Dependencies'
+sudo apt update
+sudo apt-get install git
+sudo apt-get install python3
+sudo apt-get install python3-pip
+sudo apt-get install zip
+#sudo apt install snapd
+
+# Installing amass
+echo 'Installing amass'
+#snap install amass
+apt-get install amass
+
+# Installing Subfinder
+echo 'Instaling Subfinder'
+go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+cp /root/go/bin/subfinder /usr/local/bin/
+
+# Instaling assetfinder
+echo 'Instaling assetfinder'
+go install -v github.com/tomnomnom/assetfinder@latest
+cp /root/go/bin/assetfinder /usr/local/bin/
+
+# Instaling github-subdomains
+echo 'Instaling github-subdomains'
+# wget https://raw.githubusercontent.com/gwen001/github-search/master/github-subdomains.py
+go install github.com/gwen001/github-subdomains@latest
+cp /root/go/bin/github-subdomains /usr/local/bin/
+
+# Instaling Sublist3r
+echo 'Instaling Sublist3r'
+git clone https://github.com/aboul3la/Sublist3r
+cd Sublist3r && pip3 install -r requirements.txt
+cd ..
+sudo ln -sfv /opt/Sublist3r/sublist3r.py /usr/bin/sublist3r
+
+# Instaling dnsgen'
+echo 'Instaling dnsgen'
+pip3 install dnsgen
+
+#..or from GitHub directly:
+#git clone https://github.com/ProjectAnte/dnsgen
+#cd dnsgen
+#pip3 install -r requirements.txt
+#python3 setup.py install
+
+
+
+# Instaling httprobe
+echo 'Instaling httprobe'
+go install github.com/tomnomnom/httprobe@latest
+cp /root/go/bin/httprobe /usr/local/bin/
+
+# Instaling httpx
+echo 'Instaling httpx'
+go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
+cp /root/go/bin/httpx /usr/local/bin/
+
+
+# Instaling aquatone
+echo 'Instaling aquatone'
+wget https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip
+unzip aquatone_linux_amd64_1.7.0.zip
+rm aquatone_linux_amd64_1.7.0.zip LICENSE.txt 
+mv aquatone /usr/local/bin
+
+
+# Instaling subjack
+echo 'Instaling subjack'
+go install -v github.com/haccer/subjack@latest
+cp /root/go/bin/subjack /usr/local/bin/
+
+# Instaling subover
+echo 'Instaling subover'
+go install -v github.com/Ice3man543/SubOver@latest
+cp /root/go/bin/SubOver /usr/local/bin/
+
+# Instaling waybackurls
+echo 'Instaling waybackurls'
+go install github.com/tomnomnom/waybackurls@latest
+cp /root/go/bin/waybackurls /usr/local/bin/
+
+# Instaling Nuclei
+echo 'Instaling Nuclei'
+go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
+cp /root/go/bin/nuclei /usr/local/bin/
+git clone https://github.com/projectdiscovery/nuclei-templates.git
+
+# Instaling gf
+echo 'Instaling gf'
+git clone https://github.com/tomnomnom/gf.git                                        
+cd gf/ && go build main.go
+cp main /usr/local/bin/gf
+git clone https://github.com/1ndianl33t/Gf-Patterns.git
+mkdir ~/.gf
+mv Gf-Patterns/*.json ~/.gf
+
+# Instaling other tools
+apt-get install jq

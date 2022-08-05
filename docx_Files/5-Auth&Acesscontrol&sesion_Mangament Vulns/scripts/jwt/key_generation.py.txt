@@ -1,0 +1,11 @@
+import json                                                                                                             
+from jwcrypto import jwk,jwt                                                                                            
+from crypto.PublicKey import RSA
+
+key = RSA.generate(4096)
+
+private_key = key.exportKey() 
+public_key = key.publickey().exportKey()
+
+print(public_key)
+print(public_key) 

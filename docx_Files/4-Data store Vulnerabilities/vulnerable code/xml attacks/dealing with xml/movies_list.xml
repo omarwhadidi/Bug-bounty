@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Movies>
+  <movie movie_id="5467">
+    <Title>The Campaign</Title>
+    <Year>2012</Year>
+    <Genre>Drama</Genre>
+    <Ratings>6.2</Ratings>
+  </movie>
+  <movie movie_id="2343">
+    <Title>Wolf Of wall Street</Title>
+    <Year>2018</Year>
+    <Genre>Comedy</Genre>
+    <Ratings>9.2</Ratings>
+  </movie>
+</Movies>

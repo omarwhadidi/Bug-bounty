@@ -1,0 +1,10 @@
+<button onclick="openPopup()">Open</button>
+<button onclick="sendCustomMessage()">Send</button>
+<script>
+	function openPopup() {
+		popup = open("http://target.site/to.php");
+	}
+	function sendCustomMessage() {
+		popup.postMessage("Hi there!", "http://victim.site/to.php");
+	}
+</script>
